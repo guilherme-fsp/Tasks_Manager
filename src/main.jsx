@@ -6,7 +6,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import TaskPage from './pages/TaskPAge.jsx';
+import TaskPage from './pages/TaskPage.jsx';
 
 
 const router = createBrowserRouter([
