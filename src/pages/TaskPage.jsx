@@ -10,6 +10,7 @@ function TaskPage(){
     const selectedOption = searchParams.get("selectedOption");
     const quantity = searchParams.get("quantity");
     const buyprice = searchParams.get("buyprice");
+    const date = searchParams.get("date");
     return(
         <div className="w-screen h-screen bg-slate-500 flex p-6">
             <div className="w-[500px] mx-auto space-y-4">
@@ -32,6 +33,7 @@ function TaskPage(){
                         <p className="text-slate-600 ">{selectedOption}</p>
                         <p className="text-slate-600 ">{quantity}</p>
                         <p className="text-slate-600 ">{buyprice}</p>
+                        <p className="text-slate-600 ">{date}</p>
 
                         
                 </div>

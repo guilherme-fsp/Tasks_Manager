@@ -11,6 +11,7 @@ function Tasks( {tasks, onTaskClick, onDeleteTaskClick}){
         query.set("selectedOption", task.selectedOption)
         query.set("quantity", task.quantity)
         query.set("buyprice", task.buyprice)
+        query.set("date", task.date)
         navigate(`/task?${query.toString()}`)
         
     }
