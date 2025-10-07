@@ -8,6 +8,9 @@ function Tasks( {tasks, onTaskClick, onDeleteTaskClick}){
         const query = new URLSearchParams();
         query.set("title", task.title)
         query.set("description", task.description)
+        query.set("selectedOption", task.selectedOption)
+        query.set("quantity", task.quantity)
+        query.set("buyprice", task.buyprice)
         navigate(`/task?${query.toString()}`)
         
     }

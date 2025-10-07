@@ -7,6 +7,9 @@ function TaskPage(){
     const [searchParams] = useSearchParams();
     const title = searchParams.get("title");
     const description = searchParams.get("description");
+    const selectedOption = searchParams.get("selectedOption");
+    const quantity = searchParams.get("quantity");
+    const buyprice = searchParams.get("buyprice");
     return(
         <div className="w-screen h-screen bg-slate-500 flex p-6">
             <div className="w-[500px] mx-auto space-y-4">
@@ -26,6 +29,11 @@ function TaskPage(){
                 <div className="bg-slate-200 p-4 rounded-md">
                         <h2 className="text-xl font-bold text-slate-600">{title}</h2>
                         <p className="text-slate-600 ">{description}</p>
+                        <p className="text-slate-600 ">{selectedOption}</p>
+                        <p className="text-slate-600 ">{quantity}</p>
+                        <p className="text-slate-600 ">{buyprice}</p>
+
+                        
                 </div>
             </div>
         </div>

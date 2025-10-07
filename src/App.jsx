@@ -42,12 +42,15 @@ function App(){
     const newTasks = tasks.filter(task => task.id !== taskId)
     setTasks(newTasks)
   }
-  function onAddTaskSubmit(title, description){
+  function onAddTaskSubmit(title, description, selectedOption, buyprice, quantity){
     const newTasks = {
         id: v4(),
         title: title,
         description: description,
         isCompleted: false,
+        selectedOption: selectedOption,
+        buyprice: buyprice,
+        quantity: quantity,
     }
     setTasks([...tasks, newTasks]  )
 

@@ -9,7 +9,7 @@ function AddTask({ onAddTaskSubmit }){
     const [quantity, setQuantity] = useState("");
     const [buyprice, setBuyPrice] = useState("");
     const[isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState("Selecione uma Opção");
+    const [selectedOption, setSelectedOption] = useState("");
     
     return(
     <div className="space-y-4 p-6 bg-slate-400 rounded-md shadow flex flex-col">
@@ -22,10 +22,11 @@ function AddTask({ onAddTaskSubmit }){
             onChange={(e)=> setSelectedOption(e.target.value)}
             className="border border-slate-350 outline-slate-400 px-4 py-1 rounded-md w-full text-black font-normal"
             >
-                <option disabled>Selecione uma Opção</option>
-                <option value="Option 1">Gastos</option>
-                <option value="Option 2">Recebimentos</option>
-                <option value="Option 3">Investimentos</option>
+                 {/* PENDING ADD TO THE NEXT PAGE THE UPDATED FEATURES */}
+                <option disabled></option>
+                <option value="Gastos">Gastos</option>
+                <option value="Recebimentos">Recebimentos</option>
+                <option value="Investimentos">Investimentos</option>
 
 
             </select>
@@ -48,22 +49,22 @@ function AddTask({ onAddTaskSubmit }){
         type="text"
         placeholder="Digite a Quantidade Comprada" 
         value={quantity}
-        onChange={(event)=> setDescription(event.target.value)}
+        onChange={(event)=> setQuantity(event.target.value)}
 
         />
         <Input 
         type="text"
         placeholder="Digite o preço de Compra" 
         value={buyprice}
-        onChange={(event)=> setDescription(event.target.value)}
+        onChange={(event)=> setBuyPrice(event.target.value)}
 
         />
         <button 
         onClick={()=> {
-            if (!title.trim() || !description.trim()){
+            if (!title.trim() || !description.trim() || !buyprice.trim() || !quantity.trim()){
                 return alert("Preencha corretamente os dados")
             }
-            onAddTaskSubmit(title, description)} }
+            onAddTaskSubmit(selectedOption, title, description, buyprice, quantity)} }
         className="bg-slate-500 text-white border border-slate-350 outline-slate-350 px-4 py-1 rounded-md font-medium">
             Adicionar
         </button>
