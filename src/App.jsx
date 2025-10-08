@@ -42,7 +42,7 @@ function App(){
     const newTasks = tasks.filter(task => task.id !== taskId)
     setTasks(newTasks)
   }
-  function onAddTaskSubmit(title, description, selectedOption, buyprice, quantity, date){
+  function onAddTaskSubmit(selectedOption, title, description, buyprice, quantity, date){
     const newTasks = {
         id: v4(),
         title: title,
@@ -63,19 +63,25 @@ function App(){
 
 
     return(
-        <div className="w-screen h-screen bg-slate-500 flex justify-center p-6">
-            <div className="w-[500px] space-y-4">
+        <div className="w-screen h-screen bg-slate-500 flex justify-center items-start p-6">
+            <div className="w-[1000px] grid grid-cols-2 gap-2 items-start">
+                <div className="col-span-2 text-center">
                 <Title>
                   Gestão Financeira
                   </Title>
+                  </div>
+                  <div className="">
             <AddTask
             onAddTaskSubmit={onAddTaskSubmit} 
             />
+            </div>
+            <div className="">
             <Tasks 
             tasks={tasks} 
             onTaskClick={onTaskClick}
             onDeleteTaskClick={onDeleteTaskClick}
             />
+            </div>
 
             </div>
         </div>
