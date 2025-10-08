@@ -19,7 +19,7 @@ function App(){
       const response = await fetch(
         "link_da_api",
         {
-          method: "GET",
+          method: "POST",
         }
       );
       const data = await response.json();

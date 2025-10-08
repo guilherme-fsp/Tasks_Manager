@@ -57,7 +57,13 @@ function AddTask({ onAddTaskSubmit }){
         type="number"
         placeholder="Digite o preço de Compra" 
         value={buyprice}
-        onChange={(event)=> setBuyPrice(event.target.value)}
+        onChange={(event)=> {
+            let val = event.target.value;
+            if (selectedOption == "Gastos" && val !== ""){
+                val = "-" + Math.abs(val);
+            }
+            setBuyPrice(val);
+        }}
 
         />
         <Input 

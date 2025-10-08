@@ -28,12 +28,15 @@ function TaskPage(){
                    
                 </div>
                 <div className="bg-slate-200 p-4 rounded-md">
-                        <h2 className="text-slate-600 font-extrabold ">{selectedOption}</h2>
-                        <h3 className="text-xl font-semibold text-slate-600">{title}</h3>
+                        <h2 className=" text-xl text-slate-200 font-extrabold ">{selectedOption}</h2>
+                        <h3 className="font-semibold text-slate-600">{title}</h3>
                         <p className="text-slate-600 ">{description}</p>
-                        <p className="text-slate-600 ">{quantity}</p>
-                        <p className="text-slate-600 ">{buyprice}</p>
-                        <p className="text-slate-600 ">{date}</p>
+                        <p className="text-slate-600 ">Quantidade: {quantity}</p>
+                        <p className={`text-slate-600 ${Number(buyprice) >=0  ? "text-green-600" : "text-red-600"}`}>
+                            Preço: {Number(buyprice) >=0 ? `+${buyprice}` : buyprice} 
+
+                        </p>
+                        <p className="text-slate-600  ">Data: {date}</p>
 
                         
                 </div>
