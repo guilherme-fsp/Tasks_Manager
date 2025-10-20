@@ -9,19 +9,26 @@ function TaskPage() {
     const storedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
     const selectedTitle = searchParams.get("title");
-    const urlTask = selectedTitle ? [{
-        title: selectedTitle,
-        description: searchParams.get("description") || "",
-        selectedOption: searchParams.get("selectedOption") || "",
-        quantity: searchParams.get("quantity") || "",
-        buyprice: searchParams.get("buyprice") || "",
-        date: searchParams.get("date") || "",
-    }] : [];
+    const urlTask = selectedTitle
+        ? [{
+            title: selectedTitle,
+            description: searchParams.get("description") || "",
+            selectedOption: searchParams.get("selectedOption") || "",
+            quantity: searchParams.get("quantity") || "",
+            buyprice: searchParams.get("buyprice") || "",
+            date: searchParams.get("date") || "",
+        }]
+        : [];
 
-    // Merge tasks from storage with URL task (avoid duplicates)
-    const allTasks = [...storedTasks, ...urlTask.filter(t => !storedTasks.find(s => s.title === t.title))];
+    const allTasks = [
+        ...storedTasks,
+        ...urlTask.filter(t => !storedTasks.find(s => s.title === t.title))
+    ];
 
-    // Grid layout same as before
+    // Separate tasks into Gastos and Recebimentos
+    const incomeTasks = allTasks.filter(task => task.selectedOption === "Recebimentos");
+    const expenseTasks = allTasks.filter(task => task.selectedOption === "Gastos");
+
     return (
         <div className="w-screen h-screen bg-slate-500 flex flex-col p-6 overflow-y-auto">
             <div className="flex justify-center relative mb-6">
@@ -31,15 +38,16 @@ function TaskPage() {
                 <Title>Detalhes da Atividade</Title>
             </div>
 
-            <div className="grid grid-cols-2 gap-40">
-                {allTasks.map((task, index) => {
-                    const value = Number(task.buyprice);
-                    const isIncome = task.selectedOption === "Recebimentos";
-                    return (
-                        <div key={index} className={`${isIncome ? "justify-self-start" : "justify-self-end"}`}>
-                            <div className={`p-6 rounded-md shadow-md w-[300px] ${isIncome ? "bg-green-100" : "bg-red-100"}`}>
-                                <h2 className="text-lg font-bold text-slate-800">{task.selectedOption}</h2>
-                                <h3 className="font-semibold text-slate-600">{task.title}</h3>
+            {/* Two fixed columns */}
+            <div className="grid grid-cols-2 gap-6">
+                {/* Recebimentos Column */}
+                <div className="flex flex-col">
+                    <h2 className="text-xl font-bold mb-4">Recebimentos</h2>
+                    {incomeTasks.map((task, index) => {
+                        const value = Number(task.buyprice);
+                        return (
+                            <div key={index} className="p-4 mb-4 rounded-md shadow-md w-full bg-green-100">
+                                <h3 className="font-semibold text-slate-800">{task.title}</h3>
                                 <p className="text-slate-600">{task.description}</p>
                                 <p className="text-slate-600">Quantidade: {task.quantity}</p>
                                 <p className={`text-slate-600 ${value >= 0 ? "text-green-600" : "text-red-600"}`}>
@@ -47,11 +55,31 @@ function TaskPage() {
                                 </p>
                                 <p className="text-slate-600">Data: {task.date}</p>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                </div>
+
+                {/* Gastos Column */}
+                <div className="flex flex-col">
+                    <h2 className="text-xl font-bold mb-4">Gastos</h2>
+                    {expenseTasks.map((task, index) => {
+                        const value = Number(task.buyprice);
+                        return (
+                            <div key={index} className="p-4 mb-4 rounded-md shadow-md w-full bg-red-100">
+                                <h3 className="font-semibold text-slate-800">{task.title}</h3>
+                                <p className="text-slate-600">{task.description}</p>
+                                <p className="text-slate-600">Quantidade: {task.quantity}</p>
+                                <p className={`text-slate-600 ${value >= 0 ? "text-green-600" : "text-red-600"}`}>
+                                    Preço = {value >= 0 ? `+${value}` : value}
+                                </p>
+                                <p className="text-slate-600">Data: {task.date}</p>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         </div>
     );
 }
+
 export default TaskPage;
